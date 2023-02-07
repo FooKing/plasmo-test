@@ -14,6 +14,8 @@ export const CountButton = () => {
       <span className="inline-flex items-center justify-center w-8 h-4 ml-2 text-xs font-semibold rounded-full">
         {count}
       </span>
+      <button className="btn btn-primary">Button</button>
     </button>
+
   )
 }
