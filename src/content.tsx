@@ -1,46 +1,34 @@
 import cssText from "data-text:~style.css"
 import type { PlasmoCSConfig } from "plasmo"
-
-import { CountButton } from "~features/count-button"
-
-import "~base.css"
+import SidebarNav from "~sidebar/sidebarNav";
+import {useStorage} from "@plasmohq/storage/dist/hook";
 
 export const config: PlasmoCSConfig = {
   matches: ["*://*/*"]
 }
-
 export const getStyle = () => {
   const style = document.createElement("style")
   style.textContent = cssText
   return style
 }
 
-const PlasmoOverlay = () => {
+const Sidebar = () => {
+  const [theme, setTheme] = useStorage("theme");
   async function TestCopy() {
     let clipboardTxt = await navigator.clipboard.readText();
     console.log(clipboardTxt);
   }
 
   return (
-    <div className="collapse">
-      <input type="checkbox" className="peer" />
-      <div className="collapse-title bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-        Click me to show/hide content
+    <html lang="en" data-theme={theme}>
+      <div className="sidebarMainContainer">
+        <SidebarNav/>
+        <div className="sidebarContentContainer">
+          <button className={"btn btn-primary"}>rdfnfresfdfdsfsdsdfdsffdsdns</button> 
+        </div>
       </div>
-      <div className="collapse-content bg-primary text-primary-content peer-checked:bg-secondary peer-checked:text-secondary-content">
-        <p>hello</p>
-        <button className="btn btn-sm btn-primary" onClick={TestCopy}>Woo</button>
-      </div>
-      <select className="select w-full max-w-xs">
-        <option disabled selected>Pick your favorite Simpson</option>
-        <option>Homer</option>
-        <option>Marge</option>
-        <option>Bart</option>
-        <option>Lisa</option>
-        <option>Maggie</option>
-      </select>
-    </div>
+    </html>
   )
 }
 
-export default PlasmoOverlay
+export default Sidebar
