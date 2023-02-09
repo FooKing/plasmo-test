@@ -12,13 +12,13 @@ function OptionsIndex() {
   }
 
   return (
-    <html lang={"en"} data-theme={theme}>
-    <div className="optionsPanel">
+    <div data-theme={theme} className="optionsPanel">
       <h1 className="optionsTitle">
         Options
     </h1>
     <h2 className="optionsThemeHeading"> Theme Settings </h2>
       <div className="divider"></div>
+      <label>Theme select</label>
       <select onChange={saveTheme} value={theme} className="select select-primary w-full max-w-xs" title={"Set Theme"}>
         <option disabled>Select a Theme</option>
         {themes.map(({ name, value }) => (
@@ -29,7 +29,6 @@ function OptionsIndex() {
       </select>
 
   </div>
-    </html>
 )
 }
 
