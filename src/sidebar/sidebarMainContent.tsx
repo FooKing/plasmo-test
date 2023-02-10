@@ -1,7 +1,7 @@
 
 import SidebarMenuItem from "~sidebar/sidebarMainContent/sidebarMenuItem";
 import SidebarNav from "~sidebar/sidebarNav";
-import Bolt from "~sidebar/sidebarMainContent/sidebarComponents/Bolt";
+import Bolt from "~sidebar/sidebarMainContent/sidebarComponents/bolt/Bolt";
 const  sidebarContent  = () => {
   function openOptions() {
     chrome.runtime.sendMessage({"action": "openOptionsPage"});

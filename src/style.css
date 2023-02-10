@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    overscroll-behavior: contain;
+}
+
 .sidebarMainContainer{
     width: 400px;
     min-height: 10vh;
@@ -22,6 +26,7 @@
     font-weight: 600;
     margin-left: auto;
     margin-right: auto;
+    overscroll-behavior: contain;
 }
 
 /* SideBar Content */
@@ -38,7 +43,7 @@
 /* Bolt */
 .boltContainer{
     display: flex;
-    height: 300px;
+    height: 250px;
 }
 .boltTabList{
     flex-direction: column;
@@ -53,7 +58,8 @@
     color: hsl(var(--bc));
     padding: 5px;
 }
-.tab.tab-active {
+
+.boltTabActive{
     border-color: hsl(var(--a) / var(--tw-border-opacity));
     --tw-border-opacity: 1;
     --tw-text-opacity: 1;
