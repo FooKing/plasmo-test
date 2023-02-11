@@ -1,9 +1,10 @@
 import { useState } from "react"
 import "./style.css"
 import { useStorage } from "@plasmohq/storage/dist/hook";
-import { themes } from "./options/themes";
+import { themes } from "~options/themes";
 function OptionsIndex() {
   const [theme, setTheme] = useStorage("theme", "light")
+  const [visKeybind, setVisKeybind] = useStorage("visKeybind")
 
 
 
@@ -16,7 +17,12 @@ function OptionsIndex() {
       <h1 className="optionsTitle">
         Options
     </h1>
-    <h2 className="optionsThemeHeading"> Theme Settings </h2>
+      <div className="divider"></div>
+        <h2 className="optionsHeading">Control Settings</h2>
+      <div className="divider"></div>
+
+      <div className="divider"></div>
+    <h2 className="optionsHeading"> Theme Settings </h2>
       <div className="divider"></div>
       <label>Theme select</label>
       <select onChange={saveTheme} value={theme} className="select select-primary w-full max-w-xs" title={"Set Theme"}>
@@ -27,6 +33,7 @@ function OptionsIndex() {
           </option>
         ))}
       </select>
+
 
   </div>
 )

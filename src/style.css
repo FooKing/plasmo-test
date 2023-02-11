@@ -6,7 +6,7 @@
     overscroll-behavior: contain;
 }
 
-.sidebarMainContainer{
+.sidebarInnerContainer{
     width: 400px;
     max-height: 60vh;
     right: 0;
@@ -15,8 +15,27 @@
     background-color: hsl(var(--b1));
     border-radius: 5px;
     overflow: hidden;
+    transition: right 2s ease-out;
 }
 
+.sidebarInnerContainer.hidden {
+    right: -400px;
+}
+
+.sidebarMainContainer{
+    background-color: transparent;
+}
+.btn-toolkit-hide{
+    position: fixed;
+    height: 35px;
+    width: 35px;
+    padding: 0;
+    top: calc(20vh - 35px);
+    right: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+
+}
 
 /* Sidebar NavBar */
 .navbarTitle{
@@ -66,13 +85,11 @@
     justify-items: center;
     overflow: hidden;
     align-items: center;
-    margin: auto;
 }
 
 .boltContentPanel .btn{
     margin-top: 10px;
     margin-right: 10px;
-    flex-basis: 100%;
 }
 
 .boltTabActive{
@@ -99,7 +116,7 @@
     margin-left: auto;
     margin-right: auto;
 }
-.optionsThemeHeading{
+.optionsHeading{
     font-size: 1.5rem;
     font-weight: 300;
 }

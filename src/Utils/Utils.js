@@ -45,8 +45,8 @@ export async function copyFromClipboard() {
 }
 
 //Write into clipboard
-export async function writeToClipboard(text) {
-  await navigator.clipboard.writeText(text).then(r => {
+export async function writeToClipboard(stringToWrite) {
+  await navigator.clipboard.writeText(stringToWrite).then(r => {
     return r
   });
 }
