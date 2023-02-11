@@ -39,10 +39,12 @@ export function openInCurrentTab(url, tabId) {
   return true;
 }
 
+//Copy from clipboard and return text
 export async function copyFromClipboard() {
   return await navigator.clipboard.readText();
 }
 
+//Write into clipboard
 export async function writeToClipboard(text) {
   await navigator.clipboard.writeText(text).then(r => {
     return r

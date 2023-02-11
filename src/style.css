@@ -62,7 +62,7 @@
     height: 240px;
     display: flex;
     flex-wrap: wrap;
-    padding: 5px;
+    padding: 10px;
     justify-items: center;
     overflow: hidden;
     align-items: center;
@@ -70,7 +70,8 @@
 }
 
 .boltContentPanel .btn{
-    margin: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
     flex-basis: 100%;
 }
 

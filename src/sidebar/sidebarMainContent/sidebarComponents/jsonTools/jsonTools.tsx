@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {copyFromClipboard} from "~Utils/Utils";
+import { openInNewTab } from "~Utils/backgroundMessageHandler";
 
 export default function JsonTools() {
 
@@ -29,12 +30,29 @@ export default function JsonTools() {
         })
   }
 
-
+  async function handleGetPlanImages() {
+    let clipText = await copyFromClipboard();
+    console.log(clipText);
+    if(clipText.startsWith("https://feeder")) {
+      const parts = clipText.split("/");
+      const domain = parts[2]; // should output the feederURL.
+      const orderNumberPart = parts[5]; // should output order number with all extra details.
+      const orderNumberSplit = orderNumberPart.split("-");
+      const orderNumber = orderNumberSplit[0]; // should output clean order number
+      const feederPlanImageUrl = `https://${domain}/plan/image/get?planId=${orderNumber}&imageType=PREVIEW_IMAGE&debug=true`;
+      console.log(`https://${domain}/plan/image/get?planId=${orderNumber}&imageType=PREVIEW_IMAGE&debug=true`);
+      openInNewTab(feederPlanImageUrl);
+    }
+    else {
+      console.log("Not a feeder link")
+    }
+  }
 
 
   return (
     <div className="jsonContainer">
       <button className="btn btn-sm btn-primary" onClick={handleLoadJson}>Load Plan Json</button>
+      <button className="btn btn-sm btn-primary" onClick={handleGetPlanImages}>Get Plan Images</button>
     </div>
   );
 }
