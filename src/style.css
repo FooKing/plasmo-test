@@ -8,16 +8,14 @@
 
 .sidebarMainContainer{
     width: 400px;
-    min-height: 10vh;
     max-height: 60vh;
     right: 0;
     top: 20vh;
     position: fixed;
     background-color: hsl(var(--b1));
     border-radius: 5px;
+    overflow: hidden;
 }
-
-
 
 
 /* Sidebar NavBar */
@@ -44,19 +42,36 @@
 .boltContainer{
     display: flex;
     height: 250px;
+    border: hsl(var(--b3)) 2px solid;
+    border-radius: 5px;
 }
+
 .boltTabList{
     flex-direction: column;
-    width: 20%;
-    align-content: center;
-    border-right: hsl(var(--a)) 2px solid;
-    overflow: clip;
+    width: 25%;
+    border-right: hsl(var(--b3)) 2px solid;
+    overflow-y: auto;
 }
-.boltTabItem{
+.boltContainer .tabs{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: normal;
 }
-.boltContentPanel{
+.boltContentPanel {
     color: hsl(var(--bc));
+    height: 240px;
+    display: flex;
+    flex-wrap: wrap;
     padding: 5px;
+    justify-items: center;
+    overflow: hidden;
+    align-items: center;
+    margin: auto;
+}
+
+.boltContentPanel .btn{
+    margin: 10px;
+    flex-basis: 100%;
 }
 
 .boltTabActive{

@@ -21,12 +21,10 @@ const Sidebar = () => {
   }
 
   return (
-    <html lang="en" data-theme={theme}>
-      <div className="sidebarMainContainer">
+      <div data-theme={theme} className="sidebarMainContainer">
         <SidebarNav/>
         <SidebarMainContent/>
       </div>
-    </html>
   )
 }
 

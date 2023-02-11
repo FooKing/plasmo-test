@@ -11,7 +11,7 @@ export default function Bolt() {
         <a className={`tab boltTabItem tab-bordered ${selectedTab === "jenkinsTab" ? "boltTabActive" : ""}`} onClick={() => setSelectedTab("jenkinsTab")}>Jenkins</a>
       </div>
       <div className="boltContentPanel">
-        {selectedTab === "frontendTab" && <div>
+        {selectedTab === "frontendTab" && <div className="frontendContentContainer">
           <BoltFrontendTab/>
         </div>}
         {selectedTab === "runDeckTab" && <div>

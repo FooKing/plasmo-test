@@ -2,6 +2,7 @@
 import SidebarMenuItem from "~sidebar/sidebarMainContent/sidebarMenuItem";
 import SidebarNav from "~sidebar/sidebarNav";
 import Bolt from "~sidebar/sidebarMainContent/sidebarComponents/bolt/Bolt";
+import JsonTools from "~sidebar/sidebarMainContent/sidebarComponents/jsonTools/jsonTools";
 const  sidebarContent  = () => {
   function openOptions() {
     chrome.runtime.sendMessage({"action": "openOptionsPage"});
@@ -11,7 +12,7 @@ const  sidebarContent  = () => {
   return (
   <div className="sidebarMainContentContainer">
     <SidebarMenuItem displayName={"Bolt"} component={<Bolt/>} ></SidebarMenuItem>
-    <SidebarMenuItem displayName={"Json Tools"} component={<SidebarNav/>} ></SidebarMenuItem>
+    <SidebarMenuItem displayName={"Json Tools"} component={<JsonTools/>} ></SidebarMenuItem>
     <SidebarMenuItem displayName={"Colour Picker"} component={<SidebarNav/>} ></SidebarMenuItem>
     <SidebarMenuItem displayName={"Console Commands"} component={<SidebarNav/>} ></SidebarMenuItem>
 

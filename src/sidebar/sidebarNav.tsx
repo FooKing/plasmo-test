@@ -1,7 +1,7 @@
 
 const  SidebarNav  = () => {
   function openOptions() {
-    chrome.runtime.sendMessage({"action": "openOptionsPage"});
+    chrome.runtime.sendMessage({ type: "openOptionsPage" });
   }
 
 

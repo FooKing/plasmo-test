@@ -33,6 +33,6 @@ export function environmentArray() {
     return {Code: `project${i}.`, Name: `Project ${i}`, Jenkins: `project${i}`}
   })
   // Append Live into the array at the beginning.
-  environmentArray.unshift({Code: ' ', Name: "Live", Jenkins: "master"})
+  environmentArray.unshift({Code: '', Name: "Live", Jenkins: "master"})
   return environmentArray;
 }
