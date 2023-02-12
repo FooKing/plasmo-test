@@ -1,26 +1,21 @@
 import cssText from "data-text:~style.css"
-import type { PlasmoCSConfig } from "plasmo"
 import SidebarNav from "~sidebar/sidebarNav";
 import {useStorage} from "@plasmohq/storage/dist/hook";
 import SidebarMainContent from "~sidebar/sidebarMainContent";
 import { useEffect, useState } from "react";
 
-export const config: PlasmoCSConfig = {
-  matches: ["*://*/*"]
-}
 export const getStyle = () => {
   const style = document.createElement("style")
   style.textContent = cssText
   return style
 }
 
-
-
-
 const Sidebar = () => {
-  const [isHidden, setIsHidden] = useStorage("sidebarVis",true);
-  const [theme, setTheme] = useStorage("theme");
-  const [keyDown, setKeyDown] = useState(false);
+  const [isHidden, setIsHidden] = useStorage("sidebarVis", true);
+  const [theme, setTheme] = useStorage("theme", "light");
+  const [triggerKeyDown, setTriggerKeyDown] = useState(false);
+  const [triggerKey] = useStorage("triggerKey", "Q");
+  const [modifierKey] = useStorage("modifierKey", "Control");
 
   async function TestCopy() {
     let clipboardTxt = await navigator.clipboard.readText();
@@ -31,22 +26,22 @@ const Sidebar = () => {
     setIsHidden(!isHidden);
   };
 
+  const handleKeyDown = (event) => {
+    if (event.getModifierState(modifierKey) && event.key.toUpperCase() === triggerKey) {
+      if (!triggerKeyDown) {
+        setTriggerKeyDown(true);
+        handleHideClick();
+      }
+    }
+  };
+
+  const handleKeyUp = (event) => {
+    if (event.key.toUpperCase() === triggerKey){
+      setTriggerKeyDown(false);
+    }
+  };
+
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.altKey && event.key === "q"){
-        if (!keyDown) {
-          setKeyDown(true);
-          handleHideClick();
-        }
-      }
-    };
-
-    const handleKeyUp = (event) => {
-      if (event.key === "q"){
-        setKeyDown(false);
-      }
-    };
-
     document.addEventListener("keydown", handleKeyDown);
     document.addEventListener("keyup", handleKeyUp);
 
@@ -54,7 +49,7 @@ const Sidebar = () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.removeEventListener("keyup", handleKeyUp);
     };
-  }, [handleHideClick, keyDown]);
+  }, [handleKeyDown, handleKeyUp]);
 
   return (
       <div data-theme={theme} className="sidebarMainContainer">
