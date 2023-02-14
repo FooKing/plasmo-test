@@ -6,7 +6,6 @@ export default function JsonTools() {
 
   async function getCurrentTab() {
     let queryOptions = { active: true, lastFocusedWindow: true };
-    // `tab` will either be a `tabs.Tab` instance or `undefined`.
     let [tab] = await chrome.tabs.query(queryOptions);
     return tab;
   }
@@ -15,18 +14,17 @@ export default function JsonTools() {
     let command = "";
     let argsArray = [];
     if (clipText.startsWith("https://feeder")) {
-      command = (`set2DJsonByUrl("${clipText}")`);
+      command = "set2DJsonByURL";
       argsArray[0] = clipText;
     }
     else{
-      const preparedJSON = JSON.stringify(clipText)
       command = (`set2DJson`);
-      argsArray[0] = preparedJSON;
+      argsArray[0] = clipText;
     }
         chrome.runtime.sendMessage({
           type: "injectConsoleCommand",
           functionName: command,
-          args: argsArray,
+          arguments: argsArray,
         })
   }
 
