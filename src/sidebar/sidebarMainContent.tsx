@@ -11,10 +11,10 @@ const  sidebarContent  = () => {
 
   return (
   <div className="sidebarMainContentContainer">
-    <SidebarMenuItem displayName={"Bolt"} component={<Bolt/>} ></SidebarMenuItem>
+    {/*<SidebarMenuItem displayName={"Bolt"} component={<Bolt/>} ></SidebarMenuItem>*/}
     <SidebarMenuItem displayName={"Json Tools"} component={<JsonTools/>} ></SidebarMenuItem>
-    <SidebarMenuItem displayName={"Colour Picker"} component={<SidebarNav/>} ></SidebarMenuItem>
-    <SidebarMenuItem displayName={"Console Commands"} component={<SidebarNav/>} ></SidebarMenuItem>
+    {/*<SidebarMenuItem displayName={"Colour Picker"} component={<SidebarNav/>} ></SidebarMenuItem>*/}
+    {/*<SidebarMenuItem displayName={"Console Commands"} component={<SidebarNav/>} ></SidebarMenuItem>*/}
 
   </div>
 )

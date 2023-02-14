@@ -26,7 +26,7 @@ export default function JsonTools() {
           functionName: command,
           arguments: argsArray,
         })
-  }
+  };
 
   async function handleGetPlanImages() {
     let clipText = await copyFromClipboard();
@@ -44,13 +44,47 @@ export default function JsonTools() {
     else {
       console.log("Not a feeder link")
     }
-  }
+  };
 
+
+  async function handleGetJson() {
+    let command ="get2DJson"
+    await chrome.runtime.sendMessage({
+      type: "injectConsoleCommandWithReturn",
+      functionName: command,
+    })
+  };
+
+  async function handleCorniceLoad() {
+    let command ="showCornice"
+    await chrome.runtime.sendMessage({
+      type: "injectConsoleCommandWithReturn",
+      functionName: command,
+    })
+  }
+  async function handlePelmetLoad() {
+    let command ="showPelmet"
+    await chrome.runtime.sendMessage({
+      type: "injectConsoleCommandWithReturn",
+      functionName: command,
+    })
+  }
+  async function handlePlinthLoad() {
+    let command ="showPlinth"
+    await chrome.runtime.sendMessage({
+      type: "injectConsoleCommandWithReturn",
+      functionName: command,
+    })
+  }
 
   return (
     <div className="jsonContainer">
-      <button className="btn btn-sm btn-primary" onClick={handleLoadJson}>Load Plan Json</button>
-      <button className="btn btn-sm btn-primary" onClick={handleGetPlanImages}>Get Plan Images</button>
+      <button className="btn btn-sm btn-wide btn-primary" onClick={handleCorniceLoad}>Show Cornice</button>
+      <button className="btn btn-sm btn-wide btn-primary" onClick={handlePelmetLoad}>Show Pelmet</button>
+      <button className="btn btn-sm btn-wide btn-primary" onClick={handlePlinthLoad}>Show Plinth</button>
+{/*      <button className="btn btn-sm btn-wide btn-primary" onClick={handleLoadJson}>Load Plan Json</button>
+      <button className="btn btn-sm btn-wide btn-primary" onClick={handleGetJson}>Get 2D Json</button>
+      <button className="btn btn-sm btn-wide btn-primary" onClick={handleGetPlanImages}>Get Plan Images</button>*/}
     </div>
   );
 }
