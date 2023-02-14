@@ -7,6 +7,7 @@ export function openInNewTab(url) {
           url: url,
         })
       } else {
+        console.error(response.status);
         sendResponse({ success: false });
       }
     })
@@ -28,7 +29,7 @@ export function openInCurrentTab(url, tabId) {
             url: url,
           });
         } else {
-          console.log("Unreachable Url");
+          console.error(response.status);
           sendResponse({ success: false });
         }
       });
