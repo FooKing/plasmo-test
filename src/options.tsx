@@ -3,7 +3,7 @@ import "./style.css"
 import { useStorage } from "@plasmohq/storage/dist/hook";
 import { themes } from "~options/themes";
 function OptionsIndex() {
-  const [theme, setTheme] = useStorage("theme", "light");
+  const [theme, setTheme] = useStorage("theme", "emerald");
   const [triggerKey, setTriggerKey] = useStorage("triggerKey");
   const [modifierKey, setModifierKey] = useStorage("modifierKey");
 

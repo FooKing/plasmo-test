@@ -16,7 +16,7 @@ const  sidebarContent  = () => {
     {/*<SidebarMenuItem displayName={"Bolt"} component={<Bolt/>} ></SidebarMenuItem>*/}
     {/*<SidebarMenuItem displayName={"Json Tools"} component={<JsonTools/>} ></SidebarMenuItem>*/}
     <SidebarMenuItem displayName={"Planner Tools"} component={<ComplianceTools/>} ></SidebarMenuItem>
-    <SidebarMenuItem displayName={"Conversion Tools"} component={<ConversionTools/>} ></SidebarMenuItem>
+    {/*<SidebarMenuItem displayName={"Conversion Tools"} component={<ConversionTools/>} ></SidebarMenuItem>*/}
     {/*<SidebarMenuItem displayName={"Colour Picker"} component={<SidebarNav/>} ></SidebarMenuItem>*/}
     {/*<SidebarMenuItem displayName={"Console Commands"} component={<SidebarNav/>} ></SidebarMenuItem>*/}
   </div>

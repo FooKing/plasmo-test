@@ -12,7 +12,7 @@ export const getStyle = () => {
 
 const Sidebar = () => {
   const [isHidden, setIsHidden] = useStorage("sidebarVis", true);
-  const [theme, setTheme] = useStorage("theme", "light");
+  const [theme, setTheme] = useStorage("theme", "emerald");
   const [triggerKeyDown, setTriggerKeyDown] = useState(false);
   const [triggerKey] = useStorage("triggerKey", "Q");
   const [modifierKey] = useStorage("modifierKey", "Control");

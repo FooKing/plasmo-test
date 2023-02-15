@@ -1,9 +1,9 @@
 {
-  "name": "plasmo-test",
-  "displayName": "Plasmo test",
+  "name": "compTools",
+  "displayName": "Compliance Tools",
   "version": "0.0.1",
-  "description": "Tester",
-  "author": "asds",
+  "description": "Compliance toolkit",
+  "author": "Chris",
   "scripts": {
     "dev": "plasmo dev",
     "build": "plasmo build",
