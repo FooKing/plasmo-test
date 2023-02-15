@@ -26,7 +26,7 @@ export default function JsonTools() {
           functionName: command,
           arguments: argsArray,
         })
-  };
+  }
 
   async function handleGetPlanImages() {
     let clipText = await copyFromClipboard();
@@ -44,47 +44,30 @@ export default function JsonTools() {
     else {
       console.log("Not a feeder link")
     }
-  };
+  }
 
 
-  async function handleGetJson() {
+  async function handleGet2DJson() {
     let command ="get2DJson"
     await chrome.runtime.sendMessage({
-      type: "injectConsoleCommandWithReturn",
-      functionName: command,
-    })
-  };
-
-  async function handleCorniceLoad() {
-    let command ="showCornice"
-    await chrome.runtime.sendMessage({
-      type: "injectConsoleCommandWithReturn",
+      type: "BG_get2DJson",
       functionName: command,
     })
   }
-  async function handlePelmetLoad() {
-    let command ="showPelmet"
+  async function handleGet3DJson() {
+    let command ="get3DJson"
     await chrome.runtime.sendMessage({
-      type: "injectConsoleCommandWithReturn",
-      functionName: command,
-    })
-  }
-  async function handlePlinthLoad() {
-    let command ="showPlinth"
-    await chrome.runtime.sendMessage({
-      type: "injectConsoleCommandWithReturn",
+      type: "BG_get3DJson",
       functionName: command,
     })
   }
 
   return (
     <div className="jsonContainer">
-      <button className="btn btn-sm btn-wide btn-primary" onClick={handleCorniceLoad}>Show Cornice</button>
-      <button className="btn btn-sm btn-wide btn-primary" onClick={handlePelmetLoad}>Show Pelmet</button>
-      <button className="btn btn-sm btn-wide btn-primary" onClick={handlePlinthLoad}>Show Plinth</button>
-{/*      <button className="btn btn-sm btn-wide btn-primary" onClick={handleLoadJson}>Load Plan Json</button>
-      <button className="btn btn-sm btn-wide btn-primary" onClick={handleGetJson}>Get 2D Json</button>
-      <button className="btn btn-sm btn-wide btn-primary" onClick={handleGetPlanImages}>Get Plan Images</button>*/}
+      <button className="btn btn-sm btn-wide btn-primary" onClick={handleLoadJson}>Load Plan Json</button>
+      <button className="btn btn-sm btn-wide btn-primary" onClick={handleGet2DJson}>Get 2D Json</button>
+      <button className="btn btn-sm btn-wide btn-primary" onClick={handleGet3DJson}>Get 3D Json</button>
+      <button className="btn btn-sm btn-wide btn-primary" onClick={handleGetPlanImages}>Get Plan Images</button>
     </div>
   );
 }

@@ -1,8 +1,8 @@
 {
-  "name": "compTools",
-  "displayName": "Compliance Tools",
+  "name": "qatoolkit",
+  "displayName": "Qa Toolkit",
   "version": "0.0.1",
-  "description": "Compliance toolkit",
+  "description": "Qa toolkit",
   "author": "Chris",
   "scripts": {
     "dev": "plasmo dev",

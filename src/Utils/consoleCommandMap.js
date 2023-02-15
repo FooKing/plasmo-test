@@ -5,6 +5,7 @@ const consoleCommands = {
   set2DJson: (...args) => {__debugApi__.set2DJson(...args) },
   set2DJsonByURL: (...args) => {__debugApi__.set2DJsonByUrl(...args) },
   get2DJson: (...args) => __debugApi__.get2DJson(),
+  get3DJson: (...args) => __debugApi__.get3DJson(),
   showCornice: (...args) => __debugApi__.drawCorniceRuns(...args),
   showPelmet: (...args) => __debugApi__.drawPelmetRuns(...args),
   showPlinth: (...args) => __debugApi__.drawPlinthRuns(...args),
