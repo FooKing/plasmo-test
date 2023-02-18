@@ -8,7 +8,7 @@ export default function JsonTools() {
   async function handleLoadJson() {
     let clipText = await copyFromClipboard();
     if (!clipText) {
-      console.log("failed to get clipboard")
+      setFeedbackText("failed to get clipboard");
       return;
     }
     let command;
@@ -29,6 +29,7 @@ export default function JsonTools() {
   }
 
   async function handleGetPlanImages() {
+    try{
     let clipText = await copyFromClipboard();
     if (!clipText) {
       console.log("failed to get clipboard");
@@ -45,9 +46,11 @@ export default function JsonTools() {
 
     }
     else {
-      console.log("Not a feeder link")
+      setFeedbackText("Not a valid plan link");
     }
-  }
+}catch (error) {
+      setFeedbackText(error.message);
+  }}
 
   async function handleGet2DJson() {
     let command ="get2DJson"
@@ -78,9 +81,6 @@ export default function JsonTools() {
     }
   }
 
-  function handleFeedback() {
-    setFeedbackText("Test Feedback");
-  }
 
   return (
     <div className="jsonContainer">
@@ -88,7 +88,6 @@ export default function JsonTools() {
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGet2DJson}>Get 2D Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGet3DJson}>Get 3D Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGetPlanImages}>Get Plan Images</button>
-      <button className="btn btn-sm btn-wide btn-primary" onClick={handleFeedback}>Test Feedback</button>
     </div>
   );
 }

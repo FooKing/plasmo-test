@@ -92,10 +92,19 @@
 
 /*<editor-fold desc="Feedback Panel">*/
 .feedbackPanelContainer {
-  height: 70px;
+  height: 80px;
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
   border-top: hsl(var(--b3)) 1px solid;
   padding: 5px;
+  overflow-y: auto;
+    overflow-x: clip;
+}
+.feedbackTextContainer{
+    width: 80%;
+    margin-right: 15px;
+    overflow-wrap: break-word;
 }
 /*</editor-fold>*/
 

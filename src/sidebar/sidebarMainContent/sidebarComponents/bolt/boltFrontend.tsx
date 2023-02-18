@@ -1,6 +1,9 @@
 import { useStorage } from "@plasmohq/storage/dist/hook";
 import {regionArray, environmentArray} from "../componentArrays";
+import { useContext } from "react";
+import { FeedbackContext } from "~Utils/sidebarContext";
 export default function BoltFrontendTab() {
+  const { setFeedbackText } = useContext(FeedbackContext);
   const [environment, setEnvironment] = useStorage("frontendEnvironment");
   const [region, setRegion] = useStorage("frontendRegion");
 
@@ -12,15 +15,20 @@ export default function BoltFrontendTab() {
     setRegion(event.target.value);
   }
 
-  function frontendHandleNavigate(newTab:boolean) {
+  async function frontendHandleNavigate(newTab: boolean) {
     let currentUrl = `https://frontend.${environment}wrenkitchens.${region}`;
     console.log(currentUrl);
-    if(newTab == true) {
-      chrome.runtime.sendMessage({ type: "openInNewTab", url:currentUrl });
-
+    if (newTab == true) {
+      let response = await chrome.runtime.sendMessage({ type: "openInNewTab", url: currentUrl });
+      if(response){
+        setFeedbackText(response);
+      }
     }
-    else{
-      chrome.runtime.sendMessage({ type: "openInCurrentTab", url:currentUrl });
+    else {
+      let response = await chrome.runtime.sendMessage({ type: "openInCurrentTab", url: currentUrl });
+      if(response){
+        setFeedbackText(response);
+      }
     }
 
   }

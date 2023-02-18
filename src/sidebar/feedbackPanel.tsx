@@ -1,17 +1,15 @@
-import react, { useState } from "react";
-import { useStorage } from "@plasmohq/storage/dist/hook";
-const  FeedbackPanel  = ({feedbackText}) => {
-
+const FeedbackPanel = ({ feedbackText, feedbackProgress }) => {
 
   return (
     <div className="feedbackPanelContainer">
       <div className="feedbackTextContainer">
-        <p className="feedbackText"> {feedbackText} </p>
+        <p>{feedbackText}</p>
       </div>
-
+      <div className="feedbackProgressContainer">
+        <div className="radial-progress text-primary" style={{ "--value": feedbackProgress, "--size": "3rem", "--thickness": "2px" }}>{feedbackProgress}%</div>
+      </div>
     </div>
-  )
+  );
+};
 
-}
-
-export default FeedbackPanel
+export default FeedbackPanel;
