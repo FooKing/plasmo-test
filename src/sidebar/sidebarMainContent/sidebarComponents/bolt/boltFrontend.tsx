@@ -1,7 +1,5 @@
 import { useStorage } from "@plasmohq/storage/dist/hook";
-import {regionArray, environmentArray} from "../componentArrays"
-import { openInNewTab } from "~/Utils/Utils"
-
+import {regionArray, environmentArray} from "../componentArrays";
 export default function BoltFrontendTab() {
   const [environment, setEnvironment] = useStorage("frontendEnvironment");
   const [region, setRegion] = useStorage("frontendRegion");
@@ -12,10 +10,6 @@ export default function BoltFrontendTab() {
 
   function handleRegionChange(event) {
     setRegion(event.target.value);
-  }
-
-  function frontendNewTab() {
-    chrome.runtime.sendMessage({ type: "openInNewTab", url: "https://www.google.com" });
   }
 
   function frontendHandleNavigate(newTab:boolean) {
@@ -56,8 +50,10 @@ export default function BoltFrontendTab() {
           ))}
         </select>
       </div>
-        <button className="btn btn-xs btn-primary" onClick={() => frontendHandleNavigate(true)}>Open in new</button>
-        <button className="btn btn-xs btn-primary" onClick={() => frontendHandleNavigate(false)}>Open in current</button>
+      <div className="btn-group m-5">
+        <button className="btn btn-xs grp-btn btn-primary" onClick={() => frontendHandleNavigate(true)}>New Tab</button>
+        <button className="btn btn-xs grp-btn btn-primary" onClick={() => frontendHandleNavigate(false)}>Current Tab</button>
+      </div>
     </div>
 )
 }

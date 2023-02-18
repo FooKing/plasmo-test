@@ -1,54 +1,32 @@
-//  Verify Link and open in new tab
-export function openInNewTab(url) {
-  fetch(url)
-    .then(response => {
-      if (response.status === 200) {
-        chrome.tabs.create({
-          url: url,
-        })
-      } else {
-        console.error(response.status);
-        sendResponse({ success: false });
-      }
-    })
-    .catch(error => {
-      console.error(error);
-      sendResponse({ success: false });
-    });
-  return true;
-}
-
-//Verify Link and open in the current tab.
-export function openInCurrentTab(url, tabId) {
+//Verify Link and open url - setting currentTab will open in the current tab, otherwise it will open in a new tab.
+export async function openURL(url, tabId, newTab) {
   try {
-    fetch(url)
-      .then(response => {
-        if (response.status === 200) {
-          console.log("valid Url");
-          chrome.tabs.update({
-            url: url,
-          });
-        } else {
-          console.error(response.status);
-          sendResponse({ success: false });
-        }
-      });
+    url = "https://www.google.com";
+    let response = await fetch(url)
+    if (response.status === 200) {
+      if (newTab){
+        await chrome.tabs.create({ url: url })
+    }
+      else{
+        await chrome.tabs.update(tabId, { url: url });
+      }
+    }
   } catch (error) {
     console.error(error);
-    sendResponse({ success: false });
-  }
-  return true;
-}
+  }}
 
-//Copy from clipboard and return text
+//Copy from clipboard and return text, has to happen in a content script.
 export async function copyFromClipboard() {
-  return await navigator.clipboard.readText();
+    return await navigator.clipboard.readText();
 }
 
-//Write into clipboard
+//Write into clipboard, has to happen in a content script.
 export async function writeToClipboard(stringToWrite) {
-  await navigator.clipboard.writeText(stringToWrite).then(r => {
-    return r
-  });
-}
+    if (!stringToWrite) {
+      console.log("Missing string to write to clipboard");
+      return;
+    }
+    await navigator.clipboard.writeText(stringToWrite);
+  }
+
 

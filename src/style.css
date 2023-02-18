@@ -103,16 +103,12 @@
 .boltContentPanel {
     color: hsl(var(--bc));
     height: 240px;
+    width: 100%;
     display: flex;
-    flex-wrap: wrap;
     padding: 10px;
-    justify-items: center;
-    overflow: hidden;
+    flex-wrap: nowrap;
     align-items: center;
-}
-.boltContentPanel .btn{
-    margin-top: 10px;
-    margin-right: 10px;
+    justify-content: center;
 }
 .boltTabActive{
     border-color: hsl(var(--a) / var(--tw-border-opacity));
@@ -120,6 +116,9 @@
     --tw-text-opacity: 1;
 }
 
+.grp-btn{
+border: hsl(var(--pf)) solid 1px;
+}
 
 
 /*Options   */
