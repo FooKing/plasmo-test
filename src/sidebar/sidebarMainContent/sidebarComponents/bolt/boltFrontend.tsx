@@ -17,6 +17,7 @@ export default function BoltFrontendTab() {
     console.log(currentUrl);
     if(newTab == true) {
       chrome.runtime.sendMessage({ type: "openInNewTab", url:currentUrl });
+
     }
     else{
       chrome.runtime.sendMessage({ type: "openInCurrentTab", url:currentUrl });

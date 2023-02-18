@@ -11,7 +11,7 @@ export default function JsonTools() {
       console.log("failed to get clipboard")
       return;
     }
-    let command = "";
+    let command;
     let argsArray = [];
     if (clipText.startsWith("https://feeder")) {
       command = "set2DJsonByURL";
@@ -59,7 +59,7 @@ export default function JsonTools() {
       await writeToClipboard(response);
     }
     else{
-      console.warn("No 2D Json")
+      setFeedbackText("No 2d Json");
     }
   }
 
@@ -74,6 +74,7 @@ export default function JsonTools() {
   }
     else{
       console.warn("No 3D Json")
+      setFeedbackText("No 3d Json");
     }
   }
 
