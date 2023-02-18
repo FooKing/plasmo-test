@@ -3,6 +3,7 @@ import SidebarNav from "~sidebar/sidebarNav";
 import {useStorage} from "@plasmohq/storage/dist/hook";
 import SidebarMainContent from "~sidebar/sidebarMainContent";
 import { useEffect, useState } from "react";
+import FeedbackPanel from "~sidebar/feedbackPanel";
 
 export const getStyle = () => {
   const style = document.createElement("style")
@@ -61,6 +62,7 @@ const Sidebar = () => {
         <div className={`sidebarInnerContainer ${isHidden ? "hidden" : ""}`}>
           <SidebarNav/>
           <SidebarMainContent/>
+          <FeedbackPanel/>
         </div>
       </div>
   )
