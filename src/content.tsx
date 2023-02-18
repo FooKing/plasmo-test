@@ -4,7 +4,7 @@ import {useStorage} from "@plasmohq/storage/dist/hook";
 import SidebarMainContent from "~sidebar/sidebarMainContent";
 import { useEffect, useState } from "react";
 import FeedbackPanel from "~sidebar/feedbackPanel";
-
+import {FeedbackContext} from "~Utils/sidebarContext";
 export const getStyle = () => {
   const style = document.createElement("style")
   style.textContent = cssText
@@ -17,7 +17,7 @@ const Sidebar = () => {
   const [triggerKeyDown, setTriggerKeyDown] = useState(false);
   const [triggerKey] = useStorage("triggerKey", "Q");
   const [modifierKey] = useStorage("modifierKey", "Control");
-
+  const [feedbackText, setFeedbackText] = useState('');
   async function TestCopy() {
     let clipboardTxt = await navigator.clipboard.readText();
     console.log(clipboardTxt);
@@ -52,7 +52,12 @@ const Sidebar = () => {
     };
   }, [handleKeyDown, handleKeyUp]);
 
+  const contextValue = {
+    setFeedbackText
+  };
+
   return (
+    <FeedbackContext.Provider  value={{ feedbackText, setFeedbackText }}>
       <div data-theme={theme} className="sidebarMainContainer">
         <button className="btn btn-toolkit-hide btn-sm btn-primary" onClick={handleHideClick}>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -62,9 +67,10 @@ const Sidebar = () => {
         <div className={`sidebarInnerContainer ${isHidden ? "hidden" : ""}`}>
           <SidebarNav/>
           <SidebarMainContent/>
-          <FeedbackPanel/>
+          <FeedbackPanel feedbackText={feedbackText}/>
         </div>
       </div>
+    </FeedbackContext.Provider>
   )
 }
 

@@ -1,6 +1,9 @@
 import { copyFromClipboard, writeToClipboard } from "~Utils/Utils";
+import {FeedbackContext} from "~Utils/sidebarContext";
+import { useContext } from "react";
 
 export default function JsonTools() {
+  const { setFeedbackText } = useContext(FeedbackContext);
 
   async function handleLoadJson() {
     let clipText = await copyFromClipboard();
@@ -18,7 +21,7 @@ export default function JsonTools() {
       command = (`set2DJson`);
       argsArray[0] = clipText;
     }
-        chrome.runtime.sendMessage({
+        await chrome.runtime.sendMessage({
           type: "injectConsoleCommand",
           functionName: command,
           arguments: argsArray,
@@ -74,12 +77,17 @@ export default function JsonTools() {
     }
   }
 
+  function handleFeedback() {
+    setFeedbackText("Test Feedback");
+  }
+
   return (
     <div className="jsonContainer">
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleLoadJson}>Load Plan Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGet2DJson}>Get 2D Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGet3DJson}>Get 3D Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGetPlanImages}>Get Plan Images</button>
+      <button className="btn btn-sm btn-wide btn-primary" onClick={handleFeedback}>Test Feedback</button>
     </div>
   );
 }

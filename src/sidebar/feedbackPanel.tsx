@@ -1,10 +1,6 @@
 import react, { useState } from "react";
 import { useStorage } from "@plasmohq/storage/dist/hook";
-const  FeedbackPanel  = () => {
-  const [feedbackText, SetFeedbackText] = useState("");
-
-  let updateFeedbackText = (text) => {
-  }
+const  FeedbackPanel  = ({feedbackText}) => {
 
 
   return (
