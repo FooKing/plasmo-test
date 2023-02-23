@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import BoltFrontendTab from "~sidebar/sidebarMainContent/sidebarComponents/bolt/boltFrontend";
+import BoltRundeck from "~sidebar/sidebarMainContent/sidebarComponents/bolt/boltRundeck";
 export default function Bolt() {
   const [selectedTab, setSelectedTab] = useState("tab1");
 
@@ -15,7 +16,7 @@ export default function Bolt() {
           <BoltFrontendTab/>
         </div>}
         {selectedTab === "runDeckTab" && <div>
-          Rundeck content
+          <BoltRundeck/>
         </div>}
         {selectedTab === "jenkinsTab" && <div>
           Jenkins content

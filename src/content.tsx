@@ -67,7 +67,7 @@ const Sidebar = () => {
         <div className={`sidebarInnerContainer ${isHidden ? "hidden" : ""}`}>
           <SidebarNav/>
           <SidebarMainContent/>
-          <FeedbackPanel feedbackText={feedbackText}/>
+          <FeedbackPanel feedbackText={feedbackText} feedbackProgress={undefined}/>
         </div>
       </div>
     </FeedbackContext.Provider>
