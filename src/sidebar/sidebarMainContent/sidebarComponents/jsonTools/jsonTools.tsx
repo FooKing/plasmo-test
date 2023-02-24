@@ -1,4 +1,4 @@
-import { copyFromClipboard, writeToClipboard } from "~Utils/Utils";
+import { copyFromClipboard, openURL, writeToClipboard } from "~Utils/Utils";
 import {FeedbackContext} from "~Utils/sidebarContext";
 import { useContext } from "react";
 
@@ -22,7 +22,7 @@ export default function JsonTools() {
       argsArray[0] = clipText;
     }
         await chrome.runtime.sendMessage({
-          type: "injectConsoleCommand",
+          type: "BG_injectConsoleCommand",
           functionName: command,
           arguments: argsArray,
         })
@@ -43,6 +43,7 @@ export default function JsonTools() {
       const orderNumber = orderNumberSplit[0]; // should output clean order number
       const feederPlanImageUrl = `https://${domain}/plan/image/get?planId=${orderNumber}&imageType=PREVIEW_IMAGE&debug=true`;
       console.log(`https://${domain}/plan/image/get?planId=${orderNumber}&imageType=PREVIEW_IMAGE&debug=true`);
+      await openURL(`https://${domain}/plan/image/get?planId=${orderNumber}&imageType=PREVIEW_IMAGE&debug=true`,"", true);
 
     }
     else {
@@ -59,7 +60,8 @@ export default function JsonTools() {
       functionName: command,
     })
     if (response){
-      await writeToClipboard(response);
+      let stringJson = JSON.stringify(response);
+      await writeToClipboard(stringJson);
     }
     else{
       setFeedbackText("No 2d Json");
@@ -82,12 +84,26 @@ export default function JsonTools() {
   }
 
 
+  async function handleTestFetch() {
+    let command = "get2DJson"
+    let response = await chrome.runtime.sendMessage({
+      type: "BG_savePlanJson",
+      functionName: command,
+    })
+    if (response){
+      console.log(response)
+    }
+
+  }
+
   return (
     <div className="jsonContainer">
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleLoadJson}>Load Plan Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGet2DJson}>Get 2D Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGet3DJson}>Get 3D Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGetPlanImages}>Get Plan Images</button>
+      <button className="btn btn-sm btn-wide btn-primary" onClick={handleTestFetch}>Test Fetch</button>
     </div>
   );
 }
+

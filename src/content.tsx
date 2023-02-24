@@ -18,6 +18,7 @@ const Sidebar = () => {
   const [triggerKey] = useStorage("triggerKey", "Q");
   const [modifierKey] = useStorage("modifierKey", "Control");
   const [feedbackText, setFeedbackText] = useState('');
+  const [feedbackProgress, setFeedbackProgress] = useState(0);
   async function TestCopy() {
     let clipboardTxt = await navigator.clipboard.readText();
     console.log(clipboardTxt);
@@ -67,7 +68,7 @@ const Sidebar = () => {
         <div className={`sidebarInnerContainer ${isHidden ? "hidden" : ""}`}>
           <SidebarNav/>
           <SidebarMainContent/>
-          <FeedbackPanel feedbackText={feedbackText} feedbackProgress={undefined}/>
+          <FeedbackPanel feedbackText={feedbackText} feedbackProgress={feedbackProgress}/>
         </div>
       </div>
     </FeedbackContext.Provider>
