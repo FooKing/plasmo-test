@@ -220,4 +220,8 @@
 }
 /*</editor-fold>*/
 
-
+/*<editor-fold desc="Colour Picker">*/
+.pickerContainer{
+    padding: 20px;
+}
+/*</editor-fold>*/
