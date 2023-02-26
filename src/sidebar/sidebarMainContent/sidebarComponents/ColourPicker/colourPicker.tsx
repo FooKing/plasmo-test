@@ -21,4 +21,4 @@ export default function ColourPicker() {
       <button className="btn btn-xs btn-primary mt-4" onClick={handleRandomColour}>Random Colour</button>
     </div>
   )
-} 
+}
