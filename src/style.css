@@ -269,6 +269,7 @@
     font-size: 1.5rem;
     font-weight: 700;
     max-width: 100%;
+    height: 30px;
     width: 100%;
     overflow: auto;
 }

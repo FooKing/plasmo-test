@@ -8,9 +8,12 @@ export const openInNewTab = (async (request, sender, sendResponse) => {
     sendResponse(error.message)
   }
 })
-export const openInCurrentTab = ((request, sender, sendResponse) => {
-  utils.openURL(request.url, request.tabId, false)
-  sendResponse("Opened in current tab")
+export const openInCurrentTab = (async (request, sender, sendResponse) => {
+  try {
+    await utils.openURL(request.url, request.tabId, false)
+  } catch (error) {
+    sendResponse(error.message)
+  }
 })
 export const openOptionsPage = (request, sender, sendResponse) => {
   chrome.runtime.openOptionsPage();

@@ -1,52 +1,91 @@
 import React, { useState } from "react";
+import * as math from "mathjs";
 
 export default function Calc() {
-  const [calcInput, setCalcInput] = useState("");
-  const [calcOperator, setCalcOperator] = useState("");
-  const [calcFirstOperand, setCalcFirstOperand] = useState(0);
-  const [fullInput, setFullInput] = useState("");
+  const [lastResult, setLastResult] = useState("");
+  const [calcOutput, setCalcOutput] = useState("");
+  const [runningCalc, setRunningCalc] = useState("");
+
   const handleNumberClick = (event) => {
     const number = event.currentTarget.dataset.key;
-    setCalcInput(calcInput + number);
-    setFullInput(fullInput + number);
+    if (runningCalc.includes("=")) {
+      setRunningCalc("");
+    }
+    setCalcOutput(calcOutput + number);
   };
-
   const handleOperatorClick = (event) => {
     const operator = event.currentTarget.dataset.key;
-    const currentInput = parseFloat(calcInput);
-    setCalcInput("");
-    setFullInput(fullInput + currentInput + operator);
-    setCalcOperator(operator);
-    setCalcFirstOperand(currentInput);
+    let updatedRunningCalc = runningCalc;
+    if (runningCalc.includes("=")) {
+      setRunningCalc(lastResult + operator);
+      setCalcOutput("");
+      return
+    }
+    const lastChar = runningCalc.slice(-1);
+    if (["+","-","*","/"].includes(lastChar)) {
+      if(!calcOutput) {
+        updatedRunningCalc = runningCalc.slice(0, -1) + operator;
+      }else{
+        updatedRunningCalc += calcOutput + operator;
+      }
+    } else {
+      updatedRunningCalc += calcOutput + operator;
+    }
+    setRunningCalc(updatedRunningCalc);
+    setCalcOutput("");
   };
   const handleEqualClick = () => {
-    const result = eval(fullInput);
-    setCalcInput(result.toString());
-    setFullInput(fullInput + " = " + result);
+    try {
+      const result = math.evaluate(runningCalc + calcOutput);
+      setRunningCalc(runningCalc + calcOutput + " = ");
+      setLastResult(result.toString());
+      setCalcOutput(result.toString());
+    } catch (error) {
+      setRunningCalc("Error");
+      setCalcOutput("");
+    }
   };
 
   const handleClearClick = () => {
-    setCalcInput("");
-    setFullInput("");
+    setRunningCalc("");
+    setCalcOutput("");
+    setLastResult("");
   };
+
+  function handleNegativeClick() {
+    if (calcOutput.includes("-")) {
+      setCalcOutput(runningCalc.replace("-", ""));
+    } else {
+      setCalcOutput("-" + calcOutput);
+    }
+  }
+
+  function handleBackspace() {
+    if (calcOutput.length > 0) {
+      if (runningCalc.includes("=")) {
+        setRunningCalc("");
+      }
+      setCalcOutput(calcOutput.slice(0, -1));
+    }
+  }
 
   return (
     <div className="calcOuter">
       <div className="calcInner">
         <div className="calcDisplay">
           <div className="calcContent">
-            <div className="calcInput">{fullInput}</div>
-            <div className="calcOutput">12,000</div>
+            <div className="calcInput">{runningCalc}</div>
+            <div className="calcOutput">{calcOutput}</div>
           </div>
         </div>
         <div className="calcButtons">
           <div data-key="clear" className="calcButton calcAction" onClick={handleClearClick}>
             <span>AC</span>
           </div>
-          <div data-key="Negative" className="calcButton calcAction">
+          <div data-key="Negative" className="calcButton calcAction" onClick={handleNegativeClick}>
             <span>+/-</span>
           </div>
-          <div data-key="%" className="calcButton calcAction">
+          <div data-key="%" className="calcButton calcAction" onClick={handleOperatorClick}>
             <span>%</span>
           </div>
           <div data-key="/" className="calcButton calcOperator" onClick={handleOperatorClick}>
@@ -88,13 +127,13 @@ export default function Calc() {
           <div data-key="+" className="calcButton calcOperator" onClick={handleOperatorClick}>
             <span>+</span>
           </div>
-          <div data-key="backspace" className="calcButton calcAction">
+          <div data-key="backspace" className="calcButton calcAction" onClick={handleBackspace}>
             <span>⌫</span>
           </div>
           <div data-key="0" className="calcButton" onClick={handleNumberClick}>
             <span>0</span>
           </div>
-          <div data-key="." className="calcButton">
+          <div data-key="." className="calcButton" onClick={handleNumberClick}>
             <span>.</span>
           </div>
           <div data-key="=" className="calcButton calcOperator" onClick={handleEqualClick} >
