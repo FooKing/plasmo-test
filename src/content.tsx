@@ -5,6 +5,7 @@ import SidebarMainContent from "~sidebar/sidebarMainContent";
 import { useEffect, useState } from "react";
 import FeedbackPanel from "~sidebar/feedbackPanel";
 import {FeedbackContext} from "~Utils/sidebarContext";
+import JsonEditorModal from "~sidebar/sidebarMainContent/sidebarComponents/jsonTools/JsonEditor/JsonEditorModal";
 export const getStyle = () => {
   const style = document.createElement("style")
   style.textContent = cssText
@@ -19,10 +20,6 @@ const Sidebar = () => {
   const [modifierKey] = useStorage("modifierKey", "Control");
   const [feedbackText, setFeedbackText] = useState('');
   const [feedbackProgress, setFeedbackProgress] = useState(0);
-  async function TestCopy() {
-    let clipboardTxt = await navigator.clipboard.readText();
-    console.log(clipboardTxt);
-  }
 
   const handleHideClick = () => {
     setIsHidden(!isHidden);

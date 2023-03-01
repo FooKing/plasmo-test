@@ -1,10 +1,12 @@
 import { copyFromClipboard, openURL, writeToClipboard } from "~Utils/Utils";
 import {FeedbackContext} from "~Utils/sidebarContext";
-import { useContext } from "react";
+import JsonEditorModal from "~sidebar/sidebarMainContent/sidebarComponents/jsonTools/JsonEditor/JsonEditorModal";
+import { useContext, useState } from "react";
+import ReactDOM from "react-dom";
 
 export default function JsonTools() {
   const { setFeedbackText } = useContext(FeedbackContext);
-
+    const [isJsonEditorVisible, setIsJsonEditorVisible] = useState(true);
   async function handleLoadJson() {
     let clipText = await copyFromClipboard();
     if (!clipText) {
@@ -96,13 +98,19 @@ export default function JsonTools() {
 
   }
 
+  function handleJsonEditorPanel() {
+    setIsJsonEditorVisible(!isJsonEditorVisible);
+  }
+
   return (
     <div className="jsonContainer">
+      <JsonEditorModal hidden={!isJsonEditorVisible} />
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleLoadJson}>Load Plan Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGet2DJson}>Get 2D Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGet3DJson}>Get 3D Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGetPlanImages}>Get Plan Images</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleTestFetch}>Test Fetch</button>
+      <button className="btn btn-sm btn-wide btn-primary" onClick={handleJsonEditorPanel}>Test Fetch</button>
     </div>
   );
 }
