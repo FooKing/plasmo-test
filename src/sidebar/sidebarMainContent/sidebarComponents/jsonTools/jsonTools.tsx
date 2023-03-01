@@ -103,14 +103,20 @@ export default function JsonTools() {
   }
 
   return (
+
     <div className="jsonContainer">
-      <JsonEditorModal hidden={!isJsonEditorVisible} />
+
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleLoadJson}>Load Plan Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGet2DJson}>Get 2D Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGet3DJson}>Get 3D Json</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGetPlanImages}>Get Plan Images</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleTestFetch}>Test Fetch</button>
-      <button className="btn btn-sm btn-wide btn-primary" onClick={handleJsonEditorPanel}>Test Fetch</button>
+      <button className="btn btn-sm btn-wide btn-primary" onClick={handleJsonEditorPanel}>Open Json Edit</button>
+
+      <div>
+        <JsonEditorModal hidden={!isJsonEditorVisible}/>
+      </div>
+
     </div>
   );
 }

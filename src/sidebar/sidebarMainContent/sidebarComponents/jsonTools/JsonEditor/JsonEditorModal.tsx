@@ -5,6 +5,10 @@ interface JsonEditorDataProps {
   data: Record<string, any>;
 }
 
+interface Props {
+  hidden: boolean;
+}
+
 function JsonEditorData(props: JsonEditorDataProps) {
   const { data } = props;
 
@@ -78,9 +82,9 @@ function JsonEditorData(props: JsonEditorDataProps) {
   );
 }
 
-export default function JsonEditorModal() {
+export default function JsonEditorModal(props: Props) {
   const [jsonData, setJsonData] = useState<Record<string, any> | null>(null);
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const { hidden } = props;
 
   const handleLoadJson = async () => {
     try {
@@ -88,24 +92,20 @@ export default function JsonEditorModal() {
       const parsed = JSON.parse(json);
 
       setJsonData(parsed);
-      setIsModalVisible(true);
     } catch (err) {
       console.error(`Error parsing clipboard JSON data: ${err.message}`);
     }
   };
 
-  const handleCloseModal = () => {
-    setIsModalVisible(false);
-  };
 
   return (
     <div>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleLoadJson}>
         Load Plan Json
       </button>
-      <div className={`jsonEditorPanel ${isModalVisible ? '' : 'hidden'}`}>
+      <div className={`jsonEditorPanel ${hidden ? '' : 'hidden'}`}>
         <div className="tabs">
-          <a className="tab tab-bordered" onClick={handleCloseModal}>
+          <a className="tab tab-bordered">
             Replace
           </a>
           <a className="tab tab-bordered">Drag Elements</a>
@@ -114,7 +114,7 @@ export default function JsonEditorModal() {
           {jsonData && <JsonEditorData data={jsonData} />}
           {!jsonData && <div>Click "Load Plan Json" to load JSON data from the clipboard.</div>}
         </div>
-        <button className="closeButton" onClick={handleCloseModal}>
+        <button className="closeButton" >
           X
         </button>
       </div>
