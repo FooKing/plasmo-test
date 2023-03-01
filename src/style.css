@@ -99,7 +99,7 @@
   border-top: hsl(var(--b3)) 1px solid;
   padding: 5px;
   overflow-y: auto;
-    overflow-x: clip;
+  overflow-x: clip;
 }
 .feedbackTextContainer{
     width: 80%;
@@ -330,17 +330,19 @@
 
 /*<editor-fold desc="JsonEditor">*/
 .jsonEditorPanel {
-    background-color: white;
-    border-radius: 4px;
+    background-color: hsl(var(--b1));
+    border-radius: var(--rounded-btn, 0.5rem);
+    border : 1px solid hsl(var(--pf));
     position: fixed;
     top: 50%;
-    left: 50%;
+    left: 40%;
     transform: translate(-50%, -50%);
-    width: 60%;
+    width: 60svw;
     max-width: 1000px;
-    height: 60%;
+    height: 60svh;
     max-height: 1500px;
-    overflow-y: auto;
+    min-width: 200px;
+    min-height: 200px;
     z-index: 999999;
     padding: 1em;
 }
@@ -348,7 +350,43 @@
 .jsonEditorPanel.hidden {
     display: none;
 }
-.hidden{
-    right: -10000px;
+
+.jsonPanelClose{
+    position: absolute;
+    right: 10px;
+}
+.jsonEditTabs{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px;
+}
+.jsonEditTab{
+    flex-grow: 1;
+}
+/*</editor-fold>*/
+
+/*<editor-fold desc="JsonViewer">*/
+.jsonViewerContainer {
+    width: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.jsonViewerContent {
+    flex-grow: 3;
+    overflow: auto;
+    border: blue solid 1px;
+}
+
+.jsonViewerFooter {
+    flex-shrink: 1;
+    height: 50px;
+    bottom: 0;
+
+    /* Other styles for the footer element */
 }
 /*</editor-fold>*/

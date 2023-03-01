@@ -112,9 +112,8 @@ export default function JsonTools() {
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleGetPlanImages}>Get Plan Images</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleTestFetch}>Test Fetch</button>
       <button className="btn btn-sm btn-wide btn-primary" onClick={handleJsonEditorPanel}>Open Json Edit</button>
-
       <div>
-        <JsonEditorModal hidden={!isJsonEditorVisible}/>
+          <JsonEditorModal hidden={!isJsonEditorVisible} onHiddenChange={handleJsonEditorPanel}/>
       </div>
 
     </div>
