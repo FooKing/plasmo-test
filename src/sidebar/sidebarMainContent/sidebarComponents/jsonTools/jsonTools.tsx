@@ -6,7 +6,7 @@ import ReactDOM from "react-dom";
 
 export default function JsonTools() {
   const { setFeedbackText } = useContext(FeedbackContext);
-    const [isJsonEditorVisible, setIsJsonEditorVisible] = useState(true);
+    const [isJsonEditorVisible, setIsJsonEditorVisible] = useState(false);
   async function handleLoadJson() {
     let clipText = await copyFromClipboard();
     if (!clipText) {
