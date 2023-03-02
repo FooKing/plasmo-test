@@ -4,21 +4,21 @@ export default function ComplianceTools() {
   async function handleCorniceLoad() {
     let command ="showCornice"
     await chrome.runtime.sendMessage({
-      type: "injectConsoleCommandWithReturn",
+      type: "BG_injectConsoleCommand",
       functionName: command,
     })
   }
   async function handlePelmetLoad() {
     let command ="showPelmet"
     await chrome.runtime.sendMessage({
-      type: "injectConsoleCommandWithReturn",
+      type: "BG_injectConsoleCommand",
       functionName: command,
     })
   }
   async function handlePlinthLoad() {
     let command ="showPlinth"
     await chrome.runtime.sendMessage({
-      type: "injectConsoleCommandWithReturn",
+      type: "BG_injectConsoleCommand",
       functionName: command,
     })
   }

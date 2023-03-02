@@ -24,9 +24,6 @@ export const BG_injectConsoleCommand = async (request, sender, sendResponse) => 
   let currentTab = await chrome.tabs.query(queryOptions);
   let currentTabId = currentTab[0].id;
   let functionToCall = commandMap.get(request.functionName)
-  console.log(currentTabId);
-  console.log(request.arguments[0]);
-  console.log(request.functionName)
   await chrome.scripting.executeScript({
     target: { tabId: currentTabId },
     world: chrome.scripting.ExecutionWorld.MAIN,
