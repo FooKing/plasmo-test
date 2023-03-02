@@ -1,5 +1,5 @@
 const FeedbackPanel = ({ feedbackText, feedbackProgress }) => {
-
+  
   return (
     <div className="feedbackPanelContainer">
       <div className="feedbackTextContainer">
