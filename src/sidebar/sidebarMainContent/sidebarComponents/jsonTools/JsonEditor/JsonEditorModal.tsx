@@ -9,9 +9,14 @@ interface Props {
 
 export default function JsonEditorModal(props: Props) {
   const { hidden, onHiddenChange } = props;
+  const [activeTab, setActiveTab] = useState('viewer');
 
   function handleHidePanel() {
     onHiddenChange(true);
+  }
+
+  function handleTabClick(tabName: string) {
+    setActiveTab(tabName);
   }
 
   return (
@@ -19,14 +24,24 @@ export default function JsonEditorModal(props: Props) {
       <div className={`jsonEditorPanel ${hidden ? 'hidden' : ''}`}>
         <label className="btn btn-sm btn-circle absolute right-3 top-3" onClick={handleHidePanel}>✕</label>
         <div className="tabs jsonEditTabs">
-          <a className="tab tab-bordered jsonEditTab tab-active"> Viewer </a>
-          <a className="tab tab-bordered jsonEditTab"> Replace </a>
-          <a className="tab tab-bordered jsonEditTab"> Editor </a>
+          <h1 className={`tab tab-bordered jsonEditTab ${activeTab === 'viewer' ? 'tab-active' : ''}`} onClick={() => handleTabClick('viewer')}> Viewer </h1>
+          <h1 className={`tab tab-bordered jsonEditTab ${activeTab === 'replace' ? 'tab-active' : ''}`} onClick={() => handleTabClick('replace')}> Replace </h1>
+          <h1 className={`tab tab-bordered jsonEditTab ${activeTab === 'editor' ? 'tab-active' : ''}`} onClick={() => handleTabClick('editor')}> Editor </h1>
         </div>
-        <div className="tab1Content">
-          <JsonViewer/>
+        <div className="jsonContentContainer">
+          <div className={`tabContent ${activeTab === 'viewer' ? 'active' : ''}`}>
+            <JsonViewer/>
+          </div>
+          <div className={`tabContent ${activeTab === 'replace' ? 'active' : ''}`}>
+            Replace contents goes here, replace with element 123
+          </div>
+          <div className={`tabContent ${activeTab === 'editor' ? 'active' : ''}`}>
+            Editor contents goes here, replace with element 213123
+          </div>
         </div>
       </div>
     </div>
   );
 }
+
+
