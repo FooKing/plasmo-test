@@ -16,7 +16,7 @@ export default function JsonTools() {
     let command;
     let argsArray = [];
     if (clipText.startsWith("https://feeder")) {
-      command = "set2DJsonByURL";
+      command = "set2DJsonByURL"; 
       argsArray[0] = clipText;
     }
     else{
