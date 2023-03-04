@@ -393,16 +393,18 @@
 /*<editor-fold desc="JsonViewer">*/
 .jsonViewerContainer {
     width: 100%;
-    height: 880px;
+    height: 900px;
     padding-bottom: 50px;
     overflow: hidden;
     display: flex;
-    border: blue 1px solid;
+    flex-direction: column;
 }
 
 .jsonViewerContent {
+    height: 800px;
     overflow: auto;
     padding: 10px;
+
 }
 
 .jsonViewerFooter {
@@ -411,5 +413,24 @@
     align-items: flex-end;
     justify-content: center;
     margin-top: auto;
+}
+
+
+/* prettyPrintJson */
+
+code {
+    display: inline;
+}
+.json-key {
+    color: hsl(var(--er));
+}
+.json-value {
+    color: hsl(var(--wa));
+}
+.json-boolean {
+    color: hsl(var(--in));
+}
+.json-string {
+    color: hsl(var(--su));
 }
 /*</editor-fold>*/
