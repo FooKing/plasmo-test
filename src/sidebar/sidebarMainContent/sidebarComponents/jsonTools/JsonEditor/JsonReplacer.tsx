@@ -18,10 +18,10 @@ const JsonReplacer = () => {
   }
   const handleToClipboard = async (isLeft) => {
     if(isLeft){
-      await writeToClipboard(leftJson);
+      await writeToClipboard(JSON.stringify(leftJson));
     }
     else {
-      await writeToClipboard(rightJson);
+      await writeToClipboard(JSON.stringify(rightJson));
     }
   }
 
