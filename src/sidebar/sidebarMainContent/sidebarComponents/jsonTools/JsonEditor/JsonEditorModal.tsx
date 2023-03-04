@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { copyFromClipboard } from '~Utils/Utils';
 import JsonViewer from "~sidebar/sidebarMainContent/sidebarComponents/jsonTools/JsonEditor/JsonViewer";
+import JsonReplacer from "~sidebar/sidebarMainContent/sidebarComponents/jsonTools/JsonEditor/JsonReplacer";
 
 interface Props {
   hidden: boolean;
@@ -33,7 +34,7 @@ export default function JsonEditorModal(props: Props) {
             <JsonViewer/>
           </div>
           <div className={`tabContent ${activeTab === 'replace' ? 'active' : ''}`}>
-            Replace contents goes here, replace with element 123
+            <JsonReplacer/>
           </div>
           <div className={`tabContent ${activeTab === 'editor' ? 'active' : ''}`}>
             Editor contents goes here, replace with element 213123

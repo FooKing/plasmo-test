@@ -30,4 +30,34 @@ export async function writeToClipboard(stringToWrite) {
     await navigator.clipboard.writeText(stringToWrite);
   }
 
-
+  //Convert json to html and formats them in a pretty printable way.
+export const prettyPrintJson = {
+  toHtml: (thing) => {
+    const htmlEntities = (string) => {
+      return string
+        .replace(/&/g,   '&amp;')
+        .replace(/\\"/g, '&bsol;&quot;')
+        .replace(/</g,   '&lt;')
+        .replace(/>/g,   '&gt;');
+    };
+    const replacer = (match, p1, p2, p3, p4) => {
+      const part =       { indent: p1, key: p2, value: p3, end: p4 };
+      const key =        '<code  class=json-key>';
+      const val =        '<code class=json-value>';
+      const bool =       '<code class=json-boolean>';
+      const str =        '<code class=json-string>';
+      const isBool =     ['true', 'false'].includes(part.value);
+      const valSpan =    /^"/.test(part.value) ? str : isBool ? bool : val;
+      const findName =   /"([\w]+)": |(.*): /;
+      const indentHtml = part.indent || '';
+      const keyName =    part.key && part.key.replace(findName, '$1$2');
+      const keyHtml =    part.key ? key + keyName + '</span>: ' : '';
+      const valueHtml =  part.value ? valSpan + part.value + '</span>' : '';
+      const endHtml =    part.end || '';
+      return indentHtml + keyHtml + valueHtml + endHtml;
+    };
+    const jsonLine = /^( *)("[^"]+": )?("[^"]*"|[\w.+-]*)?([{}[\],]*)?$/mg;
+    return htmlEntities(JSON.stringify(thing, null, 3))
+      .replace(jsonLine, replacer);
+  }
+};
