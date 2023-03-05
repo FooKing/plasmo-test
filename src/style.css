@@ -437,6 +437,28 @@ code {
 .json-string {
     color: hsl(var(--su));
 }
+.json-key:hover {
+    background-color: hsl(var(--nf));
+    user-select: all;
+}
+.json-value:hover {
+    background-color: hsl(var(--nf));
+    user-select: all;
+}
+.json-boolean:hover {
+    background-color: hsl(var(--nf));
+    user-select: all;
+}
+
+.json-string:hover{
+    background-color: hsl(var(--nf));
+    user-select: all;
+
+}
+.json-string:target {
+    border: blue 1px solid;
+}
+
 /*</editor-fold>*/
 
 /*<editor-fold desc="JsonReplacer">*/
@@ -465,9 +487,12 @@ code {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    margin: 5px;
+    margin: 5px;}
 
+pre[contenteditable] {
+    outline: none;
 }
+
 
 
 /*</editor-fold>*/
