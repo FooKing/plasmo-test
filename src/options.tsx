@@ -4,7 +4,7 @@ import { useStorage } from "@plasmohq/storage/dist/hook";
 import { themes } from "~options/themes";
 function OptionsIndex() {
   const [theme, setTheme] = useStorage("theme", "emerald");
-  const [triggerKey, setTriggerKey] = useStorage("triggerKey");
+  const [triggerKey, setTriggerKey] = useStorage("triggerKey", "Q");
   const [modifierKey, setModifierKey] = useStorage("modifierKey");
 
 
