@@ -13,7 +13,10 @@ export default function JsonEditorModal(props: Props) {
 
   function handleHidePanel() {
     onHiddenChange(true);
+
   }
+
+
 
   function handleTabClick(tabName: string) {
     setActiveTab(tabName);

@@ -62,10 +62,10 @@ const JsonReplacer = () => {
     if (leftJson && rightJson) {
       const newPlan = {
         ...leftJson.plan,
-        leadId: updatedRightJson?.plan.leadId ?? rightJson.plan.leadId ?? leftJson.plan.leadId,
-        email: updatedRightJson?.plan.email ?? rightJson.plan.email ?? leftJson.plan.email,
-        accountId: updatedRightJson?.plan.accountId ?? rightJson.plan.accountId ?? leftJson.plan.accountId,
-        planId: updatedRightJson?.plan.planId ?? rightJson.plan.planId ?? leftJson.plan.planId
+        leadId: JSON.parse(updatedRightJson)?.plan.leadId ?? rightJson.plan.leadId,
+        email: JSON.parse(updatedRightJson)?.plan.email ?? rightJson.plan.email,
+        accountId: JSON.parse(updatedRightJson)?.plan.accountId ?? rightJson.plan.accountId,
+        planId: JSON.parse(updatedRightJson)?.plan.planId ?? rightJson.plan.planId
       };
       const newLeftJson = {
         ...leftJson,

@@ -1,12 +1,35 @@
 import { copyFromClipboard, openURL, writeToClipboard } from "~Utils/Utils";
 import {FeedbackContext} from "~Utils/sidebarContext";
 import JsonEditorModal from "~sidebar/sidebarMainContent/sidebarComponents/jsonTools/JsonEditor/JsonEditorModal";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 export default function JsonTools() {
   const { setFeedbackText } = useContext(FeedbackContext);
-    const [isJsonEditorVisible, setIsJsonEditorVisible] = useState(false);
+  const [isJsonEditorVisible, setIsJsonEditorVisible] = useState(false);
+
+  //Stop Planner consuming all inputs and take priority when the editor is open.
+  useEffect(() => {
+    function handleKeyDown(event) {
+      if (isJsonEditorVisible) {
+        event.stopPropagation();
+      } else {
+        // Allow the event to propagate to other event listeners
+      }
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isJsonEditorVisible]);
+
+
+
+
+
   async function handleLoadJson() {
     let clipText = await copyFromClipboard();
     if (!clipText) {
@@ -98,8 +121,11 @@ export default function JsonTools() {
 
   }
 
+
+
   function handleJsonEditorPanel() {
     setIsJsonEditorVisible(!isJsonEditorVisible);
+
   }
 
   return (
