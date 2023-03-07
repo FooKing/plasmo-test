@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 import JsonViewer from "~sidebar/sidebarMainContent/sidebarComponents/jsonTools/JsonEditor/JsonViewer";
 import JsonReplacer from "~sidebar/sidebarMainContent/sidebarComponents/jsonTools/JsonEditor/JsonReplacer";
+import Draggable from "react-draggable";
 
 interface Props {
   hidden: boolean;
@@ -10,22 +11,21 @@ interface Props {
 export default function JsonEditorModal(props: Props) {
   const { hidden, onHiddenChange } = props;
   const [activeTab, setActiveTab] = useState('viewer');
-
   function handleHidePanel() {
     onHiddenChange(true);
-
   }
-
-
-
   function handleTabClick(tabName: string) {
     setActiveTab(tabName);
   }
 
+
   return (
-    <div>
+    <Draggable handle="#jsonEditorHeaderBar">
       <div className={`jsonEditorPanel ${hidden ? 'hidden' : ''}`}>
-        <label className="btn btn-sm btn-circle absolute right-3 top-3" onClick={handleHidePanel}>✕</label>
+        <div id="jsonEditorHeaderBar" className="jsonEditorHeaderBar handle">
+          <label className="jsonEditorHeaderLabel">Json Edit</label>
+        </div>
+        <label className="btn btn-xs btn-circle absolute right-1.5 top-1.5" onClick={handleHidePanel}>✕</label>
         <div className="tabs jsonEditTabs">
           <h1 className={`tab tab-bordered jsonEditTab ${activeTab === 'viewer' ? 'tab-active' : ''}`} onClick={() => handleTabClick('viewer')}> Viewer </h1>
           <h1 className={`tab tab-bordered jsonEditTab ${activeTab === 'replace' ? 'tab-active' : ''}`} onClick={() => handleTabClick('replace')}> Replace </h1>
@@ -43,8 +43,6 @@ export default function JsonEditorModal(props: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </Draggable>
   );
 }
-
-

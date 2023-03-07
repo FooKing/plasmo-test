@@ -3,6 +3,7 @@ import {FeedbackContext} from "~Utils/sidebarContext";
 import JsonEditorModal from "~sidebar/sidebarMainContent/sidebarComponents/jsonTools/JsonEditor/JsonEditorModal";
 import { useContext, useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+import Draggable from "react-draggable";
 
 export default function JsonTools() {
   const { setFeedbackText } = useContext(FeedbackContext);

@@ -336,19 +336,48 @@
 .jsonEditorPanel {
     background-color: hsl(var(--b1));
     border-radius: var(--rounded-btn, 0.5rem);
-    border : 1px solid hsl(var(--pf));
+    border: 1px solid hsl(var(--pf));
     position: fixed;
-    top: 50%;
-    left: 40%;
+    top: 10vh; /* center panel vertically in viewport */
+    left: 10vw; /* center panel horizontally in viewport */
     transform: translate(-50%, -50%);
     width: 60svw;
     height: 1000px;
     max-width: 1000px;
     min-width: 300px;
     z-index: 1;
-    padding: 1em;
+    padding: 0 1em 1em 1em;
 }
-
+.jsonEditorHeaderBar {
+    width: calc(100% + 2em);
+    margin: 0 0 2em -1em;
+    height: 35px;
+    background-color: hsl(var(--p));
+    border-radius: var(--rounded-btn, 0.5rem) var(--rounded-btn, 0.5rem) 0 0;
+}
+.jsonEditorHeaderBar:hover{
+    cursor: grab;
+}
+.jsonEditorHeaderBar:active{
+    cursor: grabbing;
+}
+.jsonEditorHeaderLabel{
+    color: hsl(var(--pc));
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0 0 0 1em;
+    padding: 0;
+    line-height: 35px;
+    height: 35px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.jsonEditorHeaderLabel:hover{
+    cursor: grab;
+}
+.jsonEditorHeaderLabel:active{
+    cursor: grabbing;
+}
 .jsonEditorPanel.hidden {
     display: none;
 }
