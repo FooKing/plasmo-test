@@ -1,21 +1,11 @@
 import React, { useState } from 'react';
-import testData from './test.json';
-import testData2 from './test2.json';
-import { copyFromClipboard, prettyPrintJson, writeToClipboard } from "~Utils/Utils";
+import { copyFromClipboard, get2DJson, load2DJson, prettyPrintJson, writeToClipboard } from "~Utils/Utils";
 const JsonReplacer = () => {
   const [leftJson, setLeftJson] = useState(null);
   const [rightJson, setRightJson] = useState(null);
   const [updatedLeftJson, setUpdatedLeftJson] = useState( null);
   const [updatedRightJson, setUpdatedRightJson] = useState( null);
 
-  const handleLoadTest = () => {
-    setLeftJson(testData);
-    setUpdatedLeftJson(null);
-  }
-  const handleLoadTest2 = async () => {
-    setRightJson(testData2);
-    setUpdatedRightJson(null);
-  }
 
   const handleFromClipboard = async (isLeft) => {
     try {
@@ -94,7 +84,6 @@ const JsonReplacer = () => {
   }
 
 
-
   const handleEditJson = (e, isLeft) => {
      if (isLeft) {
        const newJsonData = e.target.innerText;
@@ -106,11 +95,42 @@ const JsonReplacer = () => {
      }
   }
 
+  async function handleLoadPlan(isLeft) {
+    if (isLeft) {
+      if (updatedLeftJson) {
+        await load2DJson(updatedLeftJson);
+      } else {
+        await load2DJson(JSON.stringify(leftJson));
+      }
+    }
+    else {
+      if (updatedRightJson) {
+        await load2DJson(updatedRightJson);
+      } else {
+        await load2DJson(JSON.stringify(rightJson));
+      }
+    }
+  }
+
+  const handleGet2dJson = async (isLeft) => {
+    let res = await get2DJson()
+    if (res) {
+      if(isLeft){
+        setLeftJson(res)
+        setUpdatedLeftJson(null);
+      }
+      else {
+        setRightJson(res)
+        setUpdatedRightJson(null);
+      }
+    }
+  }
+
   return(
     <div className="jsonReplacerContainer">
       <div className="jsonReplacerHeader">
         <div className="btn-group grp-left">
-          <button title="Get the current pages 2d Json" className="btn btn-sm" onClick={handleLoadTest}>Get 2D</button>
+          <button title="Get the current pages 2d Json" className="btn btn-sm" onClick={() => handleGet2dJson(true)}>Get 2D</button>
           <button title="Get Json from feeder link or a direct json" className="btn btn-sm" onClick={() => handleFromClipboard(true)}>From Clipboard</button>
         </div>
         <div className="btn-group grp-right">
@@ -118,7 +138,7 @@ const JsonReplacer = () => {
           <button title="Get Json from feeder link or a direct json" className="btn btn-sm" onClick={handleReplaceRight}> → </button>
         </div>
         <div className="btn-group grp-right">
-          <button title="Get the current pages 2d Json" className="btn btn-sm" onClick={handleLoadTest2}>Get 2D</button>
+          <button title="Get the current pages 2d Json" className="btn btn-sm" onClick={() => handleGet2dJson(false)}>Get 2D</button>
           <button title="Get Json from feeder link or a direct json" className="btn btn-sm"  onClick={() => handleFromClipboard(false)}>From clipboard</button>
         </div>
       </div>
@@ -132,7 +152,7 @@ const JsonReplacer = () => {
       </div>
       <div className="jsonReplacerHeader">
         <div className="btn-group grp-left">
-          <button title="Get the current pages 2d Json" className="btn btn-sm" onClick={handleLoadTest}>Load Json</button>
+          <button title="Get the current pages 2d Json" className="btn btn-sm" onClick={() => handleLoadPlan(true)}>Load Json</button>
           <button title="Get Json from feeder link or a direct json" className="btn btn-sm" onClick={() => handleToClipboard(true)}>To Clipboard</button>
         </div>
         <div className="btn-group grp-right">
@@ -140,7 +160,7 @@ const JsonReplacer = () => {
           <button title="Get Json from feeder link or a direct json" className="btn btn-sm" onClick={handleReplaceRight}> → </button>
         </div>
         <div className="btn-group grp-right">
-          <button title="Get the current pages 2d Json" className="btn btn-sm" onClick={handleLoadTest2}>Load Json</button>
+          <button title="Get the current pages 2d Json" className="btn btn-sm" onClick={() => handleLoadPlan(false)}>Load Json</button>
           <button title="Get Json from feeder link or a direct json" className="btn btn-sm" onClick={() => handleToClipboard(false)}>To Clipboard</button>
 
         </div>

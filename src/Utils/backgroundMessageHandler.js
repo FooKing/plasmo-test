@@ -64,8 +64,11 @@ export const BG_get3DJson = async (request, sender, sendResponse) => {
       args: request.arguments,
       func: functionToCall,
     });
-    if (!outerResult[0].result) throw new Error("Missing 3d JSON result");
-    sendResponse("3d json result");
+    if (!outerResult) {
+      sendResponse({error:"Missing 3d Json Result"})
+      throw new Error("Missing 3d JSON result")
+    }
+    sendResponse(outerResult[0].result);
   } catch(err) {
     console.error(err);
   }

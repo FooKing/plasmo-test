@@ -1,4 +1,4 @@
-import { copyFromClipboard, openURL, writeToClipboard } from "~Utils/Utils";
+import { copyFromClipboard, get2DJson, get3DJson, load2DJson, openURL, writeToClipboard } from "~Utils/Utils";
 import {FeedbackContext} from "~Utils/sidebarContext";
 import JsonEditorModal from "~sidebar/sidebarMainContent/sidebarComponents/jsonTools/JsonEditor/JsonEditorModal";
 import { useContext, useEffect, useState } from "react";
@@ -36,21 +36,7 @@ export default function JsonTools() {
       setFeedbackText("failed to get clipboard");
       return;
     }
-    let command;
-    let argsArray = [];
-    if (clipText.startsWith("https://feeder")) {
-      command = "set2DJsonByURL"; 
-      argsArray[0] = clipText;
-    }
-    else{
-      command = (`set2DJson`);
-      argsArray[0] = clipText;
-    }
-        await chrome.runtime.sendMessage({
-          type: "BG_injectConsoleCommand",
-          functionName: command,
-          arguments: argsArray,
-        })
+    await load2DJson(clipText);
   }
 
   async function handleGetPlanImages() {
@@ -79,32 +65,18 @@ export default function JsonTools() {
   }}
 
   async function handleGet2DJson() {
-    let command ="get2DJson"
-    let response = await chrome.runtime.sendMessage({
-      type: "BG_get2DJson",
-      functionName: command,
-    })
-    if (response){
-      let stringJson = JSON.stringify(response);
-      await writeToClipboard(stringJson);
-    }
-    else{
-      setFeedbackText("No 2d Json");
-    }
+    let res = await get2DJson()
+      if(res){
+      let writeString = JSON.stringify(res, null, 3)
+      await writeToClipboard(writeString);
+      }
   }
 
   async function handleGet3DJson() {
-    let command ="get3DJson"
-    let response = await chrome.runtime.sendMessage({
-      type: "BG_get3DJson",
-      functionName: command,
-    })
-    if (response){
-    await writeToClipboard(response);
-  }
-    else{
-      console.warn("No 3D Json")
-      setFeedbackText("No 3d Json");
+    let res = await get3DJson()
+    if(res){
+      let writeString = JSON.stringify(res, null,3)
+      await writeToClipboard(writeString);
     }
   }
 

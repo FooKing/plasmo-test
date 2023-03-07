@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import testData from './test.json';
-import { copyFromClipboard, prettyPrintJson, writeToClipboard } from "~Utils/Utils";
+import { copyFromClipboard, get2DJson, get3DJson, load2DJson, prettyPrintJson, writeToClipboard } from "~Utils/Utils";
 
 
 
@@ -10,18 +9,19 @@ const JsonViewer = ({ edit }) => {
   const [updatedJson, setUpdatedJson] = useState(null);
 
 
-
-  const handleLoadTest = () => {
-    setJsonData(testData);
-    setUpdatedJson(null);
-
+  const handleGet2dJson = async () => {
+    let res = await get2DJson()
+    if (res) {
+      setJsonData(res);
+      setUpdatedJson(null);
+    }
   }
-  const handleLoadTest2 = async () => {
-    let res = await fetch('https://dummyjson.com/products');
-    let data = await res.json();
-    setJsonData(data);
-    setUpdatedJson(null);
-
+  const handleGet3dJson = async () => {
+    let res = await get3DJson()
+    if(res){
+      setJsonData(res);
+      setUpdatedJson(null);
+    }
   }
   const handleFromClipboard = async () => {
     try {
@@ -36,9 +36,11 @@ const JsonViewer = ({ edit }) => {
   }
 
   function handleJsonValidate() {
+    let jsonToValidate = updatedJson !== null ? updatedJson : jsonData;
+
     try {
-      if (jsonData) {
-        JSON.stringify(jsonData);
+      if (jsonToValidate) {
+        let parsedJson = JSON.parse(typeof jsonToValidate === 'string' ? jsonToValidate : JSON.stringify(jsonToValidate));
         alert('JSON is valid!');
       } else {
         alert('Please enter some JSON first');
@@ -47,6 +49,8 @@ const JsonViewer = ({ edit }) => {
       alert('Invalid JSON');
     }
   }
+
+
 
   const handleEditJson = (e) => {
     const newJsonData = e.target.innerText;
@@ -61,12 +65,20 @@ const JsonViewer = ({ edit }) => {
     }
   }
 
+  async function handleLoadPlan() {
+    if (updatedJson) {
+      await load2DJson(updatedJson);
+    } else {
+      await load2DJson(JSON.stringify(jsonData));
+    }
+  }
+
   return (
     <div className="jsonViewerContainer">
       <div className="jsonReplacerHeader">
         <div className="btn-group">
-          <button title="Get the current pages 2d Json" className="btn btn-sm" onClick={handleLoadTest}>Get 2D</button>
-          <button title="Get the current pages 3d Json" className="btn btn-sm" onClick={handleLoadTest2}>Get 3D</button>
+          <button title="Get the current pages 2d Json" className="btn btn-sm" onClick={handleGet2dJson}>Get 2D</button>
+          <button title="Get the current pages 3d Json" className="btn btn-sm" onClick={handleGet3dJson}>Get 3D</button>
           <button title="Get Json from feeder link or a direct json" className="btn btn-sm" onClick={handleFromClipboard}>From Clipboard</button>
         </div>
       </div>
@@ -80,9 +92,9 @@ const JsonViewer = ({ edit }) => {
       </div>
       <div className="jsonReplacerHeader">
         <div className="btn-group">
-          <button title="Get Json from feeder link or a direct json" className="btn btn-sm" onClick={handleJsonValidate}>Validate</button>
-          <button title="Get the current pages 2d Json" className="btn btn-sm" onClick={handleLoadTest}>Load Plan</button>
-          <button title="Get the current pages 3d Json" className="btn btn-sm" onClick={handleToClipboard}>To Clipboard</button>
+          <button title="Validate the Json to ensure the integrity" className="btn btn-sm" onClick={handleJsonValidate}>Validate</button>
+          <button title="Load the displayed 2d plan in planner" className="btn btn-sm" onClick={handleLoadPlan}>Load Plan</button>
+          <button title="Write the currently displayed json to the clipboard" className="btn btn-sm" onClick={handleToClipboard}>To Clipboard</button>
         </div>
       </div>
     </div>
