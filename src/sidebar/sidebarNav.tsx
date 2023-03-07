@@ -15,7 +15,7 @@ const  SidebarNav  = () => {
           </div>
         </div>
         <div className="flex-1">
-          <h1 className="navbarTitle">Compliance Toolkit</h1>
+          <h1 className="navbarTitle">QA Toolkit</h1>
         </div>
         <div className="flex-none">
           <button id="go-to-options" className="btn btn-square btn-ghost" onClick={openOptions}>
